@@ -1,7 +1,7 @@
-import { LOCATIONS, TRANSMISSIONS, UPGRADES, STORY_EVENTS, ENDINGS } from './content.js';
-import { beginCombat, playerAttack, playerGuard, playerRepair } from './combat.js';
-import { createState } from './state.js';
-import { saveGame } from './storage.js';
+import { LOCATIONS, TRANSMISSIONS, UPGRADES, STORY_EVENTS, ENDINGS } from './content.js?v=3';
+import { beginCombat, playerAttack, playerGuard, playerRepair } from './combat.js?v=3';
+import { createState } from './state.js?v=3';
+import { saveGame } from './storage.js?v=3';
 
 const locationById = id => LOCATIONS.find(location => location.id === id);
 const upgradeById = id => UPGRADES.find(upgrade => upgrade.id === id);
