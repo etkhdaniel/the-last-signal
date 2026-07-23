@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#07110d">
   <title>The Last Signal</title>
   <link rel="stylesheet" href="./styles/main.css?v=3">
+  <link rel="stylesheet" href="./styles/ads.css?v=1">
 </head>
 <body>
   <main class="app">
@@ -34,7 +35,14 @@
         <div id="tab-content" class="tab-content"><p class="muted">Loading field map...</p></div>
       </aside>
     </section>
-    <footer class="footer">Autosaves locally. No accounts, ads, tracking, frameworks, or suspicious radios required.</footer>
+
+    <section id="ad-banner" class="ad-banner" aria-label="Advertisement">
+      <div class="ad-label">ADVERTISEMENT</div>
+      <p id="ad-status" class="ad-status">Preparing advertisement space...</p>
+      <ins id="bottom-ad" class="adsbygoogle bottom-ad-slot"></ins>
+    </section>
+
+    <footer class="footer">Game progress autosaves locally. <a href="./privacy.html">Privacy & advertising</a>.</footer>
   </main>
   <script type="module">
     import('./js/main.js?v=3').catch((error) => {
@@ -44,6 +52,7 @@
       if (scene) scene.textContent = `SYSTEM ERROR // RECEIVER FAILED TO START\n\n${error.message}\n\nRefresh the page. If this remains, open a GitHub issue with the browser console error.`;
       if (panel) panel.innerHTML = '<h2>Startup error</h2><p class="muted">The game files loaded, but JavaScript could not initialize. A visible error has been written to the main terminal.</p>';
     });
+    import('./js/ads.js?v=1').catch((error) => console.error('Advertisement module failed:', error));
   </script>
 </body>
 </html>
