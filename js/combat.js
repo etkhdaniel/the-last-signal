@@ -1,4 +1,4 @@
-import { ENEMIES } from './content.js';
+import { ENEMIES } from './content.js?v=3';
 
 const roll = ([min, max]) => min + Math.floor(Math.random() * (max - min + 1));
 
