@@ -1,4 +1,4 @@
-import { ASCII, ENDINGS, LOCATIONS, TRANSMISSIONS, UPGRADES } from './content.js';
+import { ASCII, ENDINGS, LOCATIONS, TRANSMISSIONS, UPGRADES } from './content.js?v=3';
 
 const $ = selector => document.querySelector(selector);
 const create = (tag, className, text) => { const el = document.createElement(tag); if (className) el.className = className; if (text != null) el.textContent = text; return el; };
