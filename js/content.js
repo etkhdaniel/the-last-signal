@@ -65,19 +65,19 @@ export const ENEMIES = {
   'scout-drone': { name: 'Scout Drone', health: 16, damage: [2, 4], reward: { signal: 16, scrap: 4 }, ascii: String.raw`    .------.
  ---| 00 |---
     '----'
-      /\` },
+      /\ ` },
   'wire-hound': { name: 'Wire Hound', health: 28, damage: [3, 6], reward: { signal: 28, scrap: 7 }, ascii: String.raw`   /\___/\
   /  x   x  \
  /____^______\
-    /   \` },
+    /   \ ` },
   'relay-warden': { name: 'Relay Warden', health: 48, damage: [5, 8], reward: { signal: 65, scrap: 14, relayKeys: 1 }, boss: true, ascii: String.raw`    [||||||]
   --[  o o ]--
     [  --  ]
-     /|  |\` },
+     /|  |\ ` },
   'maintenance-unit': { name: 'Maintenance Unit', health: 42, damage: [5, 8], reward: { signal: 55, scrap: 12 }, ascii: String.raw`     ______
   __| [::] |__
  /  |______|  \
-    /|    |\` },
+    /|    |\ ` },
   'cable-worm': { name: 'Cable Worm', health: 56, damage: [6, 10], reward: { signal: 75, scrap: 16 }, ascii: String.raw`  __/\/\/\/\__
  /  o      o  \
 <____/\/\/\____>
@@ -89,7 +89,7 @@ export const ENEMIES = {
   'garden-keeper': { name: 'Garden Keeper', health: 62, damage: [7, 11], reward: { signal: 80, scrap: 15, rations: 5 }, ascii: String.raw`    .--------.
   __|  SEED  |__
  /  |   ++   |  \
-    /|______|\` },
+    /|______|\ ` },
   'spore-cloud': { name: 'Spore Cloud', health: 45, damage: [4, 12], reward: { signal: 65, rations: 3 }, ascii: String.raw`      .  .
    .  ( .. )  .
   (  .(    ).  )
@@ -106,7 +106,7 @@ export const ENEMIES = {
    ___/ | \___
   /  [  O  ]  \
  /___/|___|\___\
-      /   \` },
+      /   \ ` },
   'carrier': { name: 'The Carrier', health: 240, damage: [15, 24], reward: { signal: 999 }, boss: true, final: true, ascii: String.raw`  . . . . . . . . .
  .  THE VOICE BELOW  .
 .      (( O ))        .
