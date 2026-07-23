@@ -1,4 +1,4 @@
-import { normalizeState } from './state.js';
+import { normalizeState } from './state.js?v=3';
 
 const KEY = 'the-last-signal-save-v2';
 
