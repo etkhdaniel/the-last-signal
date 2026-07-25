@@ -1,7 +1,7 @@
-import { LOCATIONS, TRANSMISSIONS, UPGRADES, STORY_EVENTS, ENDINGS } from './content.js?v=3';
-import { beginCombat, playerAttack, playerGuard, playerRepair } from './combat.js?v=3';
-import { createState } from './state.js?v=3';
-import { saveGame } from './storage.js?v=3';
+import { LOCATIONS, TRANSMISSIONS, UPGRADES, STORY_EVENTS, ENDINGS } from './content.js?v=4';
+import { beginCombat, playerAttack, playerGuard, playerRepair } from './combat.js?v=4';
+import { createState } from './state.js?v=4';
+import { saveGame } from './storage.js?v=4';
 
 const locationById = id => LOCATIONS.find(location => location.id === id);
 const upgradeById = id => UPGRADES.find(upgrade => upgrade.id === id);
@@ -26,6 +26,7 @@ export class Game {
   pay(cost = {}) { if (!this.canAfford(cost)) return false; for (const [key, value] of Object.entries(cost)) this.state.resources[key] -= value; return true; }
   gain(reward = {}) { for (const [key, value] of Object.entries(reward)) this.state.resources[key] = (this.state.resources[key] || 0) + value; }
   unlock(id) { if (id && !this.state.unlocked.includes(id)) { this.state.unlocked.push(id); this.addLog(`LOCATION UNLOCKED // ${locationById(id)?.name || id}`); } }
+  hasCarrierKey() { return this.state.stats.carrierKey > 0 || this.state.upgrades.includes('carrier-key'); }
   listen() {
     if (this.state.resources.power < 1) return this.addLogAndEmit('The receiver lacks power.');
     this.state.resources.power -= 1; this.state.listens += 1;
@@ -81,7 +82,7 @@ export class Game {
     if (!location?.encounters?.length || this.state.combat) return;
     const step = this.state.cleared[location.id] || 0;
     const encounter = location.encounters[Math.min(step, location.encounters.length - 1)];
-    if (location.id === 'sky-array' && encounter === 'carrier' && this.state.stats.carrierKey < 1) return this.addLogAndEmit('ACCESS DENIED // The Carrier Key is required.');
+    if (location.id === 'sky-array' && encounter === 'carrier' && !this.hasCarrierKey()) return this.addLogAndEmit('ACCESS DENIED // Build the Carrier Key at the Workbench to enter Sky Array stage 2.');
     if (encounter === 'loot') {
       const scrap = 5 + Math.floor(Math.random() * 9); const signal = 10 + Math.floor(Math.random() * 21);
       this.gain({ scrap, signal }); this.addLog(`CACHE // ${scrap} scrap, ${signal} signal.`); this.advanceLocation(location); this.emit();
