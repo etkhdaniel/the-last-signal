@@ -1,4 +1,4 @@
-import { ASCII, ENDINGS, LOCATIONS, TRANSMISSIONS, UPGRADES } from './content.js?v=4';
+import { ASCII, ENDINGS, LOCATIONS, TRANSMISSIONS, UPGRADES } from './content.js?v=5';
 
 const $ = selector => document.querySelector(selector);
 const create = (tag, className, text) => { const el = document.createElement(tag); if (className) el.className = className; if (text != null) el.textContent = text; return el; };
@@ -33,6 +33,7 @@ export class UI {
       this.action(actions, 'Broadcast (-3 signal, -1 power)', () => this.game.broadcast());
       this.action(actions, 'Scavenge nearby (-2 power)', () => this.game.scavenge());
       this.action(actions, 'Rest (-1 ration)', () => this.game.rest());
+      if (this.game.canDecodeArchive()) this.action(actions, 'Decode archive (+1 intel; -75 signal, -2 power)', () => this.game.decodeArchive(), 'primary');
     } else {
       const progress = state.cleared[location.id] || 0; const total = location.encounters?.length || 0;
       const carrierLocked = location.id === 'sky-array' && progress === 1 && !this.game.hasCarrierKey();
@@ -80,6 +81,9 @@ export class UI {
     content.append(create('h2', null, 'Workbench'));
     const skyArrayWaiting = state.currentLocation === 'sky-array' && (state.cleared['sky-array'] || 0) === 1 && !this.game.hasCarrierKey();
     if (skyArrayWaiting) content.append(create('p', 'complete', 'SKY ARRAY // Stage 2 unlocks after the Carrier Key is installed.'));
+    const carrierKey = UPGRADES.find(upgrade => upgrade.id === 'carrier-key');
+    const intelShortfall = carrierKey && !this.game.hasCarrierKey() && state.resources.intel < (carrierKey.cost.intel || 0);
+    if (intelShortfall && this.game.canDecodeArchive()) content.append(create('p', 'complete', 'INTEL SOURCE // Return to Node 7 and decode the completed archive: 75 signal + 2 power → 1 intel.'));
     for (const upgrade of UPGRADES) {
       const owned = state.upgrades.includes(upgrade.id); const requirementsMet = (upgrade.requires || []).every(id => state.upgrades.includes(id));
       const card = create('button', `upgrade-card ${owned ? 'owned' : ''}`); card.disabled = owned || !requirementsMet;
@@ -91,6 +95,7 @@ export class UI {
     content.append(create('h2', null, 'Transmission Archive'));
     if (!state.discoveredTransmissions.length) content.append(create('p', 'muted', 'No coherent transmissions recovered.'));
     for (const id of state.discoveredTransmissions) { const tx = TRANSMISSIONS.find(item => item.id === id); const card = create('article', 'archive-card'); card.innerHTML = `<strong>${id.toUpperCase()}</strong><p>${tx?.text || 'corrupted'}</p>`; content.append(card); }
+    if (this.game.canDecodeArchive()) content.append(create('p', 'complete', 'ARCHIVE COMPLETE // At Node 7, decode the archive to convert 75 signal and 2 power into 1 intel.'));
     content.append(create('p', 'muted', `${state.listens} listens // ${state.broadcasts} broadcasts // ${state.scavenges} scavenges`));
   }
   renderLog(state, content) {
