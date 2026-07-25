@@ -1,0 +1,9 @@
+.git
+.github
+node_modules
+wrangler.jsonc
+README.md
+ROADMAP.md
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
