@@ -1,6 +1,6 @@
-import { Game } from './game.js?v=3';
-import { UI } from './ui.js?v=3';
-import { eraseGame, exportGame, importGame, loadGame } from './storage.js?v=3';
+import { Game } from './game.js?v=4';
+import { UI } from './ui.js?v=4';
+import { eraseGame, exportGame, importGame, loadGame } from './storage.js?v=4';
 
 let game;
 let ui;

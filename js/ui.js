@@ -1,4 +1,4 @@
-import { ASCII, ENDINGS, LOCATIONS, TRANSMISSIONS, UPGRADES } from './content.js?v=3';
+import { ASCII, ENDINGS, LOCATIONS, TRANSMISSIONS, UPGRADES } from './content.js?v=4';
 
 const $ = selector => document.querySelector(selector);
 const create = (tag, className, text) => { const el = document.createElement(tag); if (className) el.className = className; if (text != null) el.textContent = text; return el; };
@@ -35,9 +35,17 @@ export class UI {
       this.action(actions, 'Rest (-1 ration)', () => this.game.rest());
     } else {
       const progress = state.cleared[location.id] || 0; const total = location.encounters?.length || 0;
+      const carrierLocked = location.id === 'sky-array' && progress === 1 && !this.game.hasCarrierKey();
       if (location.id === 'far-horizon' && state.gameWon) {
         this.action(actions, 'Open the channel', () => this.game.chooseEnding('human'), 'primary');
         this.action(actions, 'Join the Carrier', () => this.game.chooseEnding('machine'), 'danger');
+      } else if (carrierLocked) {
+        const key = UPGRADES.find(upgrade => upgrade.id === 'carrier-key');
+        const locked = create('button', 'danger', 'Stage 2 locked — Carrier Key required');
+        locked.disabled = true;
+        actions.append(locked);
+        this.action(actions, 'Open Workbench', () => { this.activeTab = 'workbench'; this.render(state); }, 'primary');
+        if (key) actions.append(create('p', 'complete', `BUILD REQUIREMENT // ${this.game.formatCost(key.cost)} after installing Phase Array and Pulse Rifle.`));
       } else if (progress < total) this.action(actions, `Explore (${progress}/${total})`, () => this.game.explore(), 'primary');
       else actions.append(create('p', 'complete', 'AREA CLEARED // residual scavenging available in future updates.'));
       this.action(actions, 'Return to shelter', () => this.game.travel('shelter'));
@@ -70,6 +78,8 @@ export class UI {
   }
   renderWorkbench(state, content) {
     content.append(create('h2', null, 'Workbench'));
+    const skyArrayWaiting = state.currentLocation === 'sky-array' && (state.cleared['sky-array'] || 0) === 1 && !this.game.hasCarrierKey();
+    if (skyArrayWaiting) content.append(create('p', 'complete', 'SKY ARRAY // Stage 2 unlocks after the Carrier Key is installed.'));
     for (const upgrade of UPGRADES) {
       const owned = state.upgrades.includes(upgrade.id); const requirementsMet = (upgrade.requires || []).every(id => state.upgrades.includes(id));
       const card = create('button', `upgrade-card ${owned ? 'owned' : ''}`); card.disabled = owned || !requirementsMet;
