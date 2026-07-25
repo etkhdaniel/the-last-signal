@@ -1,7 +1,7 @@
-import { LOCATIONS, TRANSMISSIONS, UPGRADES, STORY_EVENTS, ENDINGS } from './content.js?v=4';
-import { beginCombat, playerAttack, playerGuard, playerRepair } from './combat.js?v=4';
-import { createState } from './state.js?v=4';
-import { saveGame } from './storage.js?v=4';
+import { LOCATIONS, TRANSMISSIONS, UPGRADES, STORY_EVENTS, ENDINGS } from './content.js?v=5';
+import { beginCombat, playerAttack, playerGuard, playerRepair } from './combat.js?v=5';
+import { createState } from './state.js?v=5';
+import { saveGame } from './storage.js?v=5';
 
 const locationById = id => LOCATIONS.find(location => location.id === id);
 const upgradeById = id => UPGRADES.find(upgrade => upgrade.id === id);
@@ -27,6 +27,14 @@ export class Game {
   gain(reward = {}) { for (const [key, value] of Object.entries(reward)) this.state.resources[key] = (this.state.resources[key] || 0) + value; }
   unlock(id) { if (id && !this.state.unlocked.includes(id)) { this.state.unlocked.push(id); this.addLog(`LOCATION UNLOCKED // ${locationById(id)?.name || id}`); } }
   hasCarrierKey() { return this.state.stats.carrierKey > 0 || this.state.upgrades.includes('carrier-key'); }
+  canDecodeArchive() { return this.state.discoveredTransmissions.length >= TRANSMISSIONS.length && this.state.upgrades.includes('cipher-wheel'); }
+  decodeArchive() {
+    if (!this.canDecodeArchive()) return this.addLogAndEmit('ARCHIVE LOCKED // Recover every transmission and install the Cipher Wheel.');
+    if (!this.pay({ signal: 75, power: 2 })) return this.addLogAndEmit('Archive decoding requires 75 signal and 2 power.');
+    this.state.resources.intel += 1;
+    this.addLog('ARCHIVE DECODED // Cross-referenced carrier fragments. Intel +1.');
+    this.emit();
+  }
   listen() {
     if (this.state.resources.power < 1) return this.addLogAndEmit('The receiver lacks power.');
     this.state.resources.power -= 1; this.state.listens += 1;
