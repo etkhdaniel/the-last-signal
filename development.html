@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="How The Last Signal was designed as a static, data-driven browser game, why it uses ASCII, how its economy was balanced, and where the project may go next.">
+  <meta name="theme-color" content="#07110d">
+  <link rel="canonical" href="https://the-last-signal.evahdaniel13.workers.dev/development.html">
+  <title>Development Notes — The Last Signal</title>
+  <link rel="stylesheet" href="./styles/site.css?v=1">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7849492850838493" crossorigin="anonymous"></script>
+</head>
+<body class="content-site">
+  <nav class="site-nav" aria-label="Primary"><div class="site-nav__inner"><a class="site-brand" href="./">THE LAST SIGNAL</a><div class="site-links"><a href="./">Home</a><a href="./how-to-play.html">How to play</a><a href="./strategy-guide.html">Strategy</a><a href="./world-and-lore.html">World & lore</a><a href="./development.html" aria-current="page">Development</a><a class="play-link" href="./play.html">Play</a></div></div></nav>
+  <main class="site-main">
+    <header class="article-header"><p class="eyebrow">THE LAST SIGNAL // PROJECT LOG</p><h1>Development Notes</h1><p class="article-deck">How The Last Signal was designed as a static, data-driven browser game, why it uses ASCII, how its economy was balanced, and where the project may go next.</p><p class="article-meta">Original project notes · Updated July 2026</p></header>
+    <div class="article-layout">
+      <article class="article-body">
+        <h2 id="origin">Project origin</h2>
+        <p>The Last Signal began as an experiment in whether a complete browser game could be built from ordinary static files: HTML for structure, CSS for the terminal-inspired interface, and JavaScript modules for state, content, combat, storage, and rendering. The project does not require a framework, database, login system, or server-side game process.</p>
+        <p>That constraint shaped the design. A static host can serve the game almost anywhere, local saves avoid account friction, and the code remains readable to people learning web development. It also means every authored location, enemy, transmission, and upgrade must fit into a compact downloadable package.</p>
+
+        <h2 id="ascii">Why ASCII art</h2>
+        <p>ASCII art is not only a visual shortcut. The entire story concerns damaged signals and incomplete reconstruction, so scenes made from characters belong naturally inside the fiction. The player sees the world through the same terminal that reports health, power, transmissions, and network events.</p>
+        <p>Text scenes also keep the project lightweight and accessible across screen sizes. They load instantly, require no image pipeline, and invite interpretation. A few slashes and brackets can suggest a machine without defining every surface. That ambiguity is especially useful for horror, where a precise illustration can be less unsettling than an incomplete one.</p>
+
+        <h2 id="architecture">Data-driven architecture</h2>
+        <p>Most authored material lives in <code>js/content.js</code>. Locations define names, range requirements, descriptions, ASCII scenes, and encounter sequences. Enemies define health, damage ranges, rewards, and visual forms. Upgrades define prerequisites, costs, and statistical effects. Transmissions define listen milestones, story text, rewards, and map unlocks.</p>
+        <p>The engine reads those definitions rather than hard-coding every encounter. Adding a location generally means adding one data object and any new enemy definitions it references. The separation makes balancing easier because resource costs and rewards can be reviewed together without searching through interface code.</p>
+        <p><code>js/state.js</code> creates and normalizes save data. <code>js/storage.js</code> handles browser persistence and encoded exports. <code>js/combat.js</code> resolves turns. <code>js/game.js</code> applies progression rules. <code>js/ui.js</code> translates state into visible controls. This is intentionally modest architecture, but each module has a clear responsibility.</p>
+
+        <h2 id="iteration">Balancing through play</h2>
+        <p>Incremental economies can fail in ways that are invisible during implementation. The Sky Array originally displayed an Explore button even when the hidden Carrier Key requirement blocked the action. A later full-playthrough revealed a more serious problem: buying every optional intel upgrade could leave too little intel for the final key.</p>
+        <p>Those issues were corrected by showing the requirement directly in the interface, recognizing older save states safely, and adding repeatable archive decoding after all transmissions are collected. The goal is not to remove planning consequences, but to prevent a player from permanently losing access to the ending after completing every available activity.</p>
+
+        <h2 id="content">Content-first website structure</h2>
+        <p>The project site now separates editorial content from the interactive game. The root homepage explains the original premise and systems in static HTML. Dedicated guides document play, strategy, lore, and development. The game itself lives at <code>/play.html</code> and remains focused on interaction.</p>
+        <p>This structure improves usability even apart from advertising review. New players can understand the game before loading it, search engines can index meaningful descriptions, stuck players can reach a guide without navigating an in-game tab, and the gameplay screen can remain free of advertisements placed beside active controls.</p>
+
+        <h2 id="privacy">Saving and privacy choices</h2>
+        <p>Progress is stored in local browser storage rather than a remote account. The game does not currently use a separate analytics service. A player can export a save string manually, but the site does not upload that save or associate it with an identity.</p>
+        <p>Advertising code is limited to content-oriented pages. The interactive play screen intentionally omits Google ad code to avoid placing advertisements near repeated game actions. The privacy page explains the difference between local game storage and third-party advertising technologies.</p>
+
+        <h2 id="roadmap">Roadmap</h2>
+        <p>The current campaign is complete, but the architecture supports expansion. Potential additions include more locations, optional encounters, factions, crafting, alternate upgrade branches, achievements, prestige systems, and new endings. Any expansion must preserve the existing strength of the project: a readable interface, a coherent finite story, and progression that respects the player’s time.</p>
+        <p>Near-term work is more likely to focus on refinement than raw scale. Better onboarding, accessibility improvements, clearer mobile layouts, additional testing, and carefully authored guide updates can add more value than simply multiplying resource numbers.</p>
+
+        <h2 id="opensource">Open source and local use</h2>
+        <p>The source repository is public and the project is licensed under the MIT License. Developers can run it with a basic static server, inspect the modular game logic, or create private modifications. Because browser modules are loaded from relative paths, local testing does not require a build step.</p>
+        <p>The project is maintained as an independent original work. Bug reports are most useful when they include the location, visible progress count, browser, and exact message from the Event Log. Exporting the save before testing a risky fix is also recommended.</p>
+      </article>
+      <aside class="article-aside" aria-label="On this page"><strong>On this page</strong><a href="#origin">Origin</a><a href="#ascii">Why ASCII</a><a href="#architecture">Architecture</a><a href="#iteration">Iteration</a><a href="#content">Site structure</a><a href="#privacy">Privacy</a><a href="#roadmap">Roadmap</a><a href="#opensource">Open source</a><a href="./play.html">Play the game →</a></aside>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="site-footer__inner"><span>The Last Signal is an original independent browser game.</span><span><a href="./privacy.html">Privacy & advertising</a> · <a href="https://github.com/etkhdaniel/the-last-signal">Source code</a></span></div></footer>
+</body>
+</html>
