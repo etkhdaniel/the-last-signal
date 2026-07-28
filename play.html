@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Play The Last Signal, an original incremental ASCII survival adventure for the browser.">
+  <meta name="theme-color" content="#07110d">
+  <link rel="canonical" href="https://the-last-signal.evahdaniel13.workers.dev/play.html">
+  <title>Play The Last Signal</title>
+  <link rel="stylesheet" href="./styles/main.css?v=3">
+  <link rel="stylesheet" href="./styles/site.css?v=1">
+</head>
+<body class="game-site">
+  <nav class="game-nav" aria-label="Game navigation">
+    <a href="./">← The Last Signal homepage</a>
+    <span><a href="./how-to-play.html">How to play</a> · <a href="./strategy-guide.html">Strategy guide</a> · <a href="./privacy.html">Privacy</a></span>
+  </nav>
+  <div class="game-context"><strong>GAMEPLAY SCREEN // AD-FREE</strong> Progress autosaves in this browser. New players can review the beginner guide before entering the field.</div>
+  <main class="app">
+    <header class="topbar">
+      <div><p class="eyebrow">NODE 7 // RECEIVER ONLINE</p><h1>THE LAST SIGNAL</h1><p class="subtitle">An incremental ASCII survival transmission.</p></div>
+      <div class="save-tools"><button id="save-export">Export save</button><button id="save-import">Import save</button><button id="save-reset" class="danger">Erase save</button></div>
+    </header>
+
+    <section class="stats" aria-label="Game status">
+      <div class="stat"><span>Signal</span><strong id="stat-signal">0</strong></div>
+      <div class="stat"><span>Power</span><strong id="stat-power">0/0</strong></div>
+      <div class="stat"><span>Scrap</span><strong id="stat-scrap">0</strong></div>
+      <div class="stat"><span>Rations</span><strong id="stat-rations">0</strong></div>
+      <div class="stat"><span>Intel</span><strong id="stat-intel">0</strong></div>
+      <div class="stat"><span>Health</span><strong id="stat-health">0/0</strong></div>
+      <div class="stat"><span>Damage</span><strong id="stat-damage">0</strong></div>
+      <div class="stat"><span>Range</span><strong id="stat-range">0</strong></div>
+      <div class="stat"><span>Relay keys</span><strong id="stat-keys">0</strong></div>
+    </section>
+
+    <section class="workspace">
+      <section class="panel main-panel"><pre id="scene" class="scene" aria-live="polite">INITIALIZING RECEIVER...</pre><div id="scene-actions" class="actions"></div></section>
+      <aside class="panel side-panel">
+        <nav class="tabs" aria-label="Game panels"><button class="active" data-tab="field">Field</button><button data-tab="workbench">Workbench</button><button data-tab="archive">Archive</button><button data-tab="log">Log</button></nav>
+        <div id="tab-content" class="tab-content"><p class="muted">Loading field map...</p></div>
+      </aside>
+    </section>
+
+    <footer class="footer">Game progress autosaves locally. <a href="./privacy.html">Privacy</a> · <a href="./">About the game</a>.</footer>
+  </main>
+  <script type="module">
+    import('./js/main.js?v=5').catch((error) => {
+      console.error('The Last Signal failed to start:', error);
+      const scene = document.querySelector('#scene');
+      const panel = document.querySelector('#tab-content');
+      if (scene) scene.textContent = `SYSTEM ERROR // RECEIVER FAILED TO START\n\n${error.message}\n\nRefresh the page. If this remains, open a GitHub issue with the browser console error.`;
+      if (panel) panel.innerHTML = '<h2>Startup error</h2><p class="muted">The game files loaded, but JavaScript could not initialize. A visible error has been written to the main terminal.</p>';
+    });
+  </script>
+</body>
+</html>

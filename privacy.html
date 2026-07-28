@@ -3,36 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Privacy and advertising information for The Last Signal.">
+  <meta name="description" content="How local game saves, hosting, advertising technologies, consent choices, and the accountless design of The Last Signal work.">
   <meta name="theme-color" content="#07110d">
-  <title>Privacy & Advertising — The Last Signal</title>
-  <link rel="stylesheet" href="./styles/main.css?v=3">
-  <style>
-    .legal{max-width:820px;margin:26px auto;padding:22px;line-height:1.65}.legal h1{font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:.08em}.legal h2{margin-top:2rem;font-size:1.05rem}.legal a{color:var(--accent)}.legal p,.legal li{color:#a8d9b8}.legal code{color:var(--amber)}
-  </style>
+  <link rel="canonical" href="https://the-last-signal.evahdaniel13.workers.dev/privacy.html">
+  <title>Privacy and Advertising — The Last Signal</title>
+  <link rel="stylesheet" href="./styles/site.css?v=1">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7849492850838493" crossorigin="anonymous"></script>
 </head>
-<body>
-  <main class="app">
-    <article class="panel legal">
-      <p class="eyebrow">NODE 7 // SITE INFORMATION</p>
-      <h1>Privacy & Advertising</h1>
-      <p><a href="./">Return to The Last Signal</a></p>
+<body class="content-site">
+  <nav class="site-nav" aria-label="Primary"><div class="site-nav__inner"><a class="site-brand" href="./">THE LAST SIGNAL</a><div class="site-links"><a href="./">Home</a><a href="./how-to-play.html">How to play</a><a href="./strategy-guide.html">Strategy</a><a href="./world-and-lore.html">World & lore</a><a href="./development.html">Development</a><a class="play-link" href="./play.html">Play</a></div></div></nav>
+  <main class="site-main">
+    <header class="article-header"><p class="eyebrow">NODE 7 // SITE INFORMATION</p><h1>Privacy and Advertising</h1><p class="article-deck">How local game saves, hosting, advertising technologies, consent choices, and the project’s accountless design work.</p><p class="article-meta">Last updated July 2026</p></header>
+    <div class="article-layout">
+      <article class="article-body">
+        <h2 id="overview">Overview</h2>
+        <p>The Last Signal is a browser-based game and informational website. This page explains what the game stores locally, what the site does not currently collect through its own code, and how third-party advertising services may process information on content pages.</p>
 
-      <h2>Local game saves</h2>
-      <p>The game stores progress in your browser using local storage. Save data remains on your device unless you copy and share an exported save.</p>
+        <h2 id="saves">Local game saves</h2>
+        <p>The game stores progress in your browser using local storage. This save can include resources, upgrades, unlocked locations, encounter progress, transmissions, settings, elapsed play time, and story state. Local storage remains on the device and browser profile where it was created unless you clear site data.</p>
+        <p>The Export save feature creates an encoded text representation of the local save and copies it to the clipboard. The site does not automatically upload exported saves. Anyone who receives an exported save string may be able to import and inspect the game state it contains, so treat it as personal game data.</p>
 
-      <h2>Advertising</h2>
-      <p>When advertising is enabled, third-party advertising providers such as Google may use cookies, local storage, device information, or similar technologies to serve, measure, and personalize advertisements. Advertising providers operate under their own privacy policies.</p>
+        <h2 id="accounts">Accounts and analytics</h2>
+        <p>The game does not require an account and does not currently operate its own user database. The site does not currently include a separate first-party analytics service. Hosting providers may process ordinary request information such as IP address, user agent, requested path, and timestamps to deliver and protect the website under their own terms.</p>
 
-      <h2>Current configuration</h2>
-      <p>The advertisement loader remains inactive until valid publisher and ad-unit identifiers are added to <code>js/ad-config.js</code>. Before that configuration is completed, the site does not load the Google AdSense script.</p>
+        <h2 id="ads">Google advertising</h2>
+        <p>Content-oriented pages may load Google AdSense code. Google and its partners may use cookies, local storage, device identifiers, IP addresses, and similar technologies to deliver, limit, personalize, and measure advertising. The exact advertisements shown and the technologies used can depend on region, consent choices, browser settings, and Google’s policies.</p>
+        <p>The interactive game page at <code>/play.html</code> intentionally does not include Google advertising code. This keeps advertisements away from frequently used gameplay controls and separates the game experience from monetized article content.</p>
 
-      <h2>Game analytics</h2>
-      <p>The game does not currently include a separate analytics service. Repository hosting and advertising providers may collect standard technical information according to their own terms.</p>
+        <h2 id="consent">Consent and controls</h2>
+        <p>Where required, a consent message may ask visitors to manage advertising choices. Browser privacy controls, cookie settings, content blockers, and Google advertising settings may also affect how ads are delivered. Disabling advertising storage does not disable the game’s separate local save unless all site storage is cleared.</p>
 
-      <h2>Questions</h2>
-      <p>Questions or concerns can be submitted through the project’s GitHub issue tracker.</p>
-    </article>
+        <h2 id="ads-txt">Authorized sellers</h2>
+        <p>The root <code>ads.txt</code> file identifies advertising systems authorized to sell inventory for this publisher. It does not contain visitor information. Its purpose is to help advertisers verify that an advertising request is associated with an authorized seller.</p>
+
+        <h2 id="links">External links</h2>
+        <p>The website links to the project’s GitHub repository. External websites have their own privacy practices, and this policy does not control information processed after you follow an external link.</p>
+
+        <h2 id="changes">Changes and questions</h2>
+        <p>This page may be updated when the site adds or removes services. Material changes will be reflected in the text and repository history. Questions and bug reports can be submitted through the public GitHub issue tracker.</p>
+      </article>
+      <aside class="article-aside" aria-label="On this page"><strong>On this page</strong><a href="#overview">Overview</a><a href="#saves">Local saves</a><a href="#accounts">Accounts</a><a href="#ads">Advertising</a><a href="#consent">Consent</a><a href="#ads-txt">ads.txt</a><a href="#links">External links</a><a href="#changes">Changes</a><a href="./play.html">Play the game →</a></aside>
+    </div>
   </main>
+  <footer class="site-footer"><div class="site-footer__inner"><span>The Last Signal is an original independent browser game.</span><span><a href="./privacy.html">Privacy & advertising</a> · <a href="https://github.com/etkhdaniel/the-last-signal">Source code</a></span></div></footer>
 </body>
 </html>

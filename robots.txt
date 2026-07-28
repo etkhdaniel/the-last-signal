@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://the-last-signal.evahdaniel13.workers.dev/sitemap.xml

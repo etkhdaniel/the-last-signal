@@ -3,60 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="The Last Signal — an original incremental ASCII survival adventure.">
+  <meta name="description" content="The Last Signal is an original incremental ASCII survival game about rebuilding a receiver, exploring a storm-buried network, and deciding what the last signal becomes.">
   <meta name="theme-color" content="#07110d">
-  <title>The Last Signal</title>
-  <link rel="stylesheet" href="./styles/main.css?v=3">
-  <link rel="stylesheet" href="./styles/ads.css?v=1">
-  <script async
-    data-last-signal-adsense="true"
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7849492850838493"
-    crossorigin="anonymous"></script>
-</head>
-<body>
-  <main class="app">
-    <header class="topbar">
-      <div><p class="eyebrow">NODE 7 // RECEIVER ONLINE</p><h1>THE LAST SIGNAL</h1><p class="subtitle">An incremental ASCII survival transmission.</p></div>
-      <div class="save-tools"><button id="save-export">Export save</button><button id="save-import">Import save</button><button id="save-reset" class="danger">Erase save</button></div>
-    </header>
-
-    <section class="stats" aria-label="Game status">
-      <div class="stat"><span>Signal</span><strong id="stat-signal">0</strong></div>
-      <div class="stat"><span>Power</span><strong id="stat-power">0/0</strong></div>
-      <div class="stat"><span>Scrap</span><strong id="stat-scrap">0</strong></div>
-      <div class="stat"><span>Rations</span><strong id="stat-rations">0</strong></div>
-      <div class="stat"><span>Intel</span><strong id="stat-intel">0</strong></div>
-      <div class="stat"><span>Health</span><strong id="stat-health">0/0</strong></div>
-      <div class="stat"><span>Damage</span><strong id="stat-damage">0</strong></div>
-      <div class="stat"><span>Range</span><strong id="stat-range">0</strong></div>
-      <div class="stat"><span>Relay keys</span><strong id="stat-keys">0</strong></div>
-    </section>
-
-    <section class="workspace">
-      <section class="panel main-panel"><pre id="scene" class="scene" aria-live="polite">INITIALIZING RECEIVER...</pre><div id="scene-actions" class="actions"></div></section>
-      <aside class="panel side-panel">
-        <nav class="tabs" aria-label="Game panels"><button class="active" data-tab="field">Field</button><button data-tab="workbench">Workbench</button><button data-tab="archive">Archive</button><button data-tab="log">Log</button></nav>
-        <div id="tab-content" class="tab-content"><p class="muted">Loading field map...</p></div>
-      </aside>
-    </section>
-
-    <section id="ad-banner" class="ad-banner" aria-label="Advertisement">
-      <div class="ad-label">ADVERTISEMENT</div>
-      <p id="ad-status" class="ad-status">Preparing advertisement space...</p>
-      <ins id="bottom-ad" class="adsbygoogle bottom-ad-slot"></ins>
-    </section>
-
-    <footer class="footer">Game progress autosaves locally. <a href="./privacy.html">Privacy & advertising</a>.</footer>
-  </main>
-  <script type="module">
-    import('./js/main.js?v=5').catch((error) => {
-      console.error('The Last Signal failed to start:', error);
-      const scene = document.querySelector('#scene');
-      const panel = document.querySelector('#tab-content');
-      if (scene) scene.textContent = `SYSTEM ERROR // RECEIVER FAILED TO START\n\n${error.message}\n\nRefresh the page. If this remains, open a GitHub issue with the browser console error.`;
-      if (panel) panel.innerHTML = '<h2>Startup error</h2><p class="muted">The game files loaded, but JavaScript could not initialize. A visible error has been written to the main terminal.</p>';
-    });
-    import('./js/ads.js?v=1').catch((error) => console.error('Advertisement module failed:', error));
+  <link rel="canonical" href="https://the-last-signal.evahdaniel13.workers.dev/">
+  <title>The Last Signal — Incremental ASCII Survival Game</title>
+  <link rel="stylesheet" href="./styles/site.css?v=1">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7849492850838493" crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "The Last Signal",
+    "url": "https://the-last-signal.evahdaniel13.workers.dev/",
+    "genre": ["Incremental game", "Survival game", "Interactive fiction"],
+    "gamePlatform": "Web browser",
+    "applicationCategory": "Game",
+    "description": "An original incremental ASCII survival adventure about rebuilding a receiver, exploring a machine-haunted landscape, and choosing the future of a communications network."
+  }
   </script>
+</head>
+<body class="content-site">
+  <nav class="site-nav" aria-label="Primary">
+    <div class="site-nav__inner">
+      <a class="site-brand" href="./">THE LAST SIGNAL</a>
+      <div class="site-links">
+        <a href="./" aria-current="page">Home</a>
+        <a href="./how-to-play.html">How to play</a>
+        <a href="./strategy-guide.html">Strategy</a>
+        <a href="./world-and-lore.html">World & lore</a>
+        <a href="./development.html">Development</a>
+        <a class="play-link" href="./play.html">Play</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="site-main">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">NODE 7 // ORIGINAL BROWSER GAME</p>
+        <h1>THE LAST SIGNAL</h1>
+        <p class="hero-copy">Wake beneath an electrostatic storm. Rebuild a forgotten receiver, follow transmissions into abandoned districts, and fight the machines still guarding a network that should have died years ago. The Last Signal is a free incremental ASCII survival adventure designed for short check-ins, long optimization sessions, and a complete story with two endings.</p>
+        <div class="hero-actions">
+          <a class="button-link primary" href="./play.html">Play the game</a>
+          <a class="button-link" href="./how-to-play.html">Read the beginner guide</a>
+        </div>
+      </div>
+      <div class="terminal-card" aria-label="ASCII illustration of Node 7">
+<pre>       .--------------------------------.
+      /   FIELD SHELTER // NODE 7        \
+     /____________________________________\
+     |  [RECEIVER]         [WORKBENCH]    |
+     |     | |                  /\         |
+     |   __|_|__               /__\        |
+     |  |  07   |        _____/____\_____  |
+     |__|_______|_______|______________|___|
+         /  \                 ||
+   ~~~~~ electrostatic rain on the roof ~~~~</pre>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="what-is-it">
+      <h2 id="what-is-it">A complete story inside an incremental system</h2>
+      <p class="section-intro">The game begins with a nearly powerless shelter and a receiver that produces one signal at a time. Every action expands the same interconnected system: listening reveals transmissions, transmissions expose new locations, exploration produces resources, combat yields relay keys, and the workbench turns salvage into permanent capabilities. Progress is saved locally in the browser, so a session can last five minutes or continue across many visits.</p>
+      <div class="feature-grid">
+        <article class="feature-card"><h3>Listen and decode</h3><p>Spend power to search the static for seven authored transmissions. Each fragment adds context, resources, or coordinates that change the explorable map.</p></article>
+        <article class="feature-card"><h3>Explore twelve locations</h3><p>Travel from a drainage ditch and flooded suburb to buried service tunnels, a mirror station, and the final Sky Array.</p></article>
+        <article class="feature-card"><h3>Build twenty upgrades</h3><p>Choose between stronger signal generation, power recovery, damage, armor, resource efficiency, decoding tools, and range.</p></article>
+        <article class="feature-card"><h3>Fight turn-based battles</h3><p>Strike, guard, repair, or retreat against corrupted drones, cable-grown predators, network wardens, and major bosses.</p></article>
+        <article class="feature-card"><h3>Recover three relay keys</h3><p>Boss encounters open the route to the long-range array. A completionist path remains viable through repeatable archive decoding.</p></article>
+        <article class="feature-card"><h3>Choose the network's future</h3><p>The final decision does not merely change a score. It determines whether the last signal becomes many imperfect voices or one perfect voice.</p></article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="premise">
+      <h2 id="premise">The premise</h2>
+      <div class="prose-columns">
+        <p>Node 7 was built to receive emergency communications after the rest of the network failed. By the time the player wakes, the shelter is empty, the weather system has stopped behaving like weather, and automated infrastructure continues exchanging messages without human operators. The receiver still catches fragments: warnings about lights between towers, coordinates attached to dead channels, reports from a greenhouse with no staff, and a voice that seems to know the player’s call sign.</p>
+        <p>The landscape is not presented through a conventional map or illustrated cutscenes. Every place is rendered as text and ASCII art, leaving room for the player to imagine the scale of the ruins. A few lines can turn a group of rooflines into a flooded suburb or make a sealed agricultural vault feel unnervingly alive. The limited visual language is deliberate: everything reaches the player through the same damaged terminal that structures the story.</p>
+        <p>The central mystery concerns the Carrier, a signal that is more than a broadcast. It can imitate voices, predict transmissions, and synchronize machines across enormous distances. Early upgrades make survival easier, but they also strengthen the same receiver the Carrier uses to reach Node 7. By the final hours, the player must decide whether rebuilding the network has rescued something human or completed a machine process that began before the game opened.</p>
+        <p>The Last Signal is designed as a small but finished narrative game rather than an endless clicker. Passive signal generation creates breathing room between active choices, while finite locations and authored encounters give the campaign a clear shape. Two endings resolve the main conflict, and exported saves allow players to preserve or share a completed run without creating an account.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="systems">
+      <h2 id="systems">The systems at a glance</h2>
+      <div class="fact-grid">
+        <div class="fact-card"><strong>12</strong><p>distinct locations, from Node 7 to the Far Horizon</p></div>
+        <div class="fact-card"><strong>20</strong><p>permanent workbench upgrades across several build paths</p></div>
+        <div class="fact-card"><strong>12</strong><p>enemy and boss encounters with unique ASCII forms</p></div>
+        <div class="fact-card"><strong>2</strong><p>story endings determined by the final network choice</p></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="guides">
+      <h2 id="guides">Guides and original reference material</h2>
+      <p class="section-intro">These pages explain the design and systems without requiring the game to be running. They are written for new players, returning players who are stuck, and readers interested in how the project was built.</p>
+      <div class="link-grid">
+        <a class="content-card" href="./how-to-play.html"><h3>How to play</h3><p>A full beginner walkthrough covering resources, travel, combat, upgrades, saves, and the route out of the early game.</p></a>
+        <a class="content-card" href="./strategy-guide.html"><h3>Strategy guide</h3><p>Build-order advice, resource priorities, boss preparation, recovery tactics, and an explanation of the late-game intel economy.</p></a>
+        <a class="content-card" href="./world-and-lore.html"><h3>World and lore</h3><p>A spoiler-aware field guide to Node 7, the storm, the machine network, major locations, and the themes behind the two endings.</p></a>
+        <a class="content-card" href="./development.html"><h3>Development notes</h3><p>How a data-driven static website became an incremental game, why ASCII was chosen, and what the project may add next.</p></a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="access">
+      <h2 id="access">Free, accountless, and built for the browser</h2>
+      <p class="section-intro">The Last Signal does not require a download, registration, or payment. It runs as a static web application and stores ordinary progress in local browser storage. The interface is responsive for desktop and mobile browsers, and save data can be exported as text before clearing a browser or moving to another device. The source code is publicly available for people who want to study the project or run it locally.</p>
+      <div class="hero-actions">
+        <a class="button-link primary" href="./play.html">Enter Node 7</a>
+        <a class="button-link" href="./privacy.html">Privacy and advertising</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="site-footer__inner"><span>The Last Signal is an original independent browser game.</span><span><a href="./privacy.html">Privacy & advertising</a> · <a href="https://github.com/etkhdaniel/the-last-signal">Source code</a></span></div></footer>
 </body>
 </html>
